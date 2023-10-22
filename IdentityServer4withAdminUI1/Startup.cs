@@ -106,7 +106,29 @@ namespace IdentityServer4withAdminUI1
                     // set the redirect URI to http://localhost:5000/signin-google
                     options.ClientId = "copy client ID from Google here";
                     options.ClientSecret = "copy client secret from Google here";
-                });
+                })
+                .AddOpenIdConnect("aad", "Sign-in with Azure AD", options =>
+                {
+                    options.Authority = "https://login.microsoftonline.com/common";
+                    options.ClientId = Configuration.GetValue<string>("AAD_CLIENT_ID");
+                    options.ClientSecret = Configuration.GetValue<string>("AAD_CLIENT_SECRET");
+
+                    options.SignInScheme = IdentityConstants.ExternalScheme;
+                    options.SignOutScheme = IdentityServerConstants.SignoutScheme;
+
+                    options.ResponseType = "id_token";
+                    options.CallbackPath = "/signin-aad";
+                    options.SignedOutCallbackPath = "/signout-callback-aad";
+                    options.RemoteSignOutPath = "/signout-aad";
+
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        NameClaimType = "name",
+                        RoleClaimType = "role"
+                    };
+                });;
 
             services.Configure<CookiePolicyOptions>(options =>
             {

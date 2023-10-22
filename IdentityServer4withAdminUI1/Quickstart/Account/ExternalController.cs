@@ -259,7 +259,8 @@ namespace IdentityServer4.Quickstart.UI
 
             // email
             var email = claims.FirstOrDefault(x => x.Type == JwtClaimTypes.Email)?.Value ??
-                        claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
+                        claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value ?? 
+                        claims.FirstOrDefault(x => x.Type == ClaimTypes.Upn)?.Value;
             
             if (email != null)
             {
