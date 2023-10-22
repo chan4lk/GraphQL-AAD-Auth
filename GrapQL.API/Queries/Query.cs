@@ -12,7 +12,7 @@ namespace GrapQL.API.Queries
                 Title = "C# in depth.",
                 Author = new Author
                 {
-                    Name = claimsPrincipal.Claims.FirstOrDefault(c=>  c.Type == ClaimTypes.Name)?.Value 
+                    Name = claimsPrincipal.Claims.FirstOrDefault(c=>  c.Type == "name")?.Value 
                 }
             };
     }

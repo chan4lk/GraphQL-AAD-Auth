@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 namespace GrapQL.API
@@ -22,6 +24,7 @@ namespace GrapQL.API
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            IdentityModelEventSource.ShowPII = true;
         }
 
         public IConfiguration Configuration { get; }
@@ -29,7 +32,7 @@ namespace GrapQL.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // services.AddControllers();
+            services.AddControllers();
             services.AddAuthorization();
             
             services
@@ -41,12 +44,19 @@ namespace GrapQL.API
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
+                    
                     options.TokenValidationParameters =
                         new TokenValidationParameters
                         {
-                            ValidIssuer = "http://localhost:5000/",
-                            ValidAudience = "https://localhost:5001/",
-                            ValidateIssuerSigningKey = false
+                            ValidIssuer = "http://localhost:5000",
+                            ValidateAudience = false,
+                            ValidateIssuerSigningKey = false,
+                            SignatureValidator = delegate(string token, TokenValidationParameters parameters)
+                            {
+                                var jwt = new JwtSecurityToken(token);
+
+                                return jwt;
+                            },
                         };
                 });
         }
@@ -69,7 +79,7 @@ namespace GrapQL.API
 
             app.UseEndpoints(endpoints =>
             {
-                // endpoints.MapControllers();
+                endpoints.MapControllers();
                 endpoints.MapGraphQL();
             });
         }
