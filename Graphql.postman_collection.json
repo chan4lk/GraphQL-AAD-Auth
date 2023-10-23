@@ -1,0 +1,199 @@
+{
+	"info": {
+		"_postman_id": "3474f5b0-20af-4fec-b521-72edc345def7",
+		"name": "Graphql",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "132210"
+	},
+	"item": [
+		{
+			"name": "https://localhost:5003/graphql/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "scope",
+							"value": "profile openid role",
+							"type": "string"
+						},
+						{
+							"key": "tokenRequestParams",
+							"value": [
+								{
+									"key": "response_type",
+									"value": "id_token token",
+									"enabled": true,
+									"send_as": "request_url"
+								}
+							],
+							"type": "any"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "http://localhost:5000/connect/token",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "http://localhost:5000/connect/authorize",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "4e238bacf66d435aabdc0b68265aef1c",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "c95e3023f2194cea9ce0f2a8a2cb2b43",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "idv_access_token",
+							"type": "string"
+						},
+						{
+							"key": "useBrowser",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "grant_type",
+							"value": "authorization_code_with_pkce",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    query : {\n        book {\n            title\n            author {\n            name\n            }\n        }\n    }\n}\n"
+				},
+				"url": {
+					"raw": "https://localhost:5003/graphql/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"graphql",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:5003/graphql/ Copy",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "scope",
+							"value": "profile openid",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "http://localhost:5000/connect/token",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "http://localhost:5000/connect/authorize",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "4e238bacf66d435aabdc0b68265aef1c",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "c95e3023f2194cea9ce0f2a8a2cb2b43",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "idv_access_token",
+							"type": "string"
+						},
+						{
+							"key": "useBrowser",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "grant_type",
+							"value": "authorization_code_with_pkce",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "tokenRequestParams",
+							"value": [
+								{
+									"key": "response_type",
+									"value": "id_token token",
+									"enabled": true,
+									"send_as": "request_url"
+								}
+							],
+							"type": "any"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    query : {\n        book {\n            title\n            author {\n            name\n            }\n        }\n    }\n}\n"
+				},
+				"url": {
+					"raw": "https://localhost:5003/weatherforecast",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"weatherforecast"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

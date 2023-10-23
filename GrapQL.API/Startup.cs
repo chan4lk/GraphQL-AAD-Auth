@@ -57,6 +57,7 @@ namespace GrapQL.API
 
                                 return jwt;
                             },
+                            RoleClaimType = "role"
                         };
                 });
         }
