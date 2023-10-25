@@ -1,3 +1,4 @@
+using GrapQL.API.Auth;
 using HotChocolate.AspNetCore.Authorization;
 
 namespace GrapQL.API.Models
@@ -7,7 +8,7 @@ namespace GrapQL.API.Models
     {
         public string Title { get; set; }
 
-        [Authorize(Roles = new string[] {"Admin" })]
+        [CustomAuth(Roles = new string[] {"Admin"} )]
         public Author Author { get; set; }
     }
 
